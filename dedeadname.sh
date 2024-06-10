@@ -21,10 +21,6 @@ if ! git filter-repo --version &>/dev/null; then
     die "Please install git-filter-repo"
 fi
 
-if ! gh --version &>/dev/null; then
-    die "Please install github-cli"
-fi
-
 if [ "$#" -lt 2 ]; then
     die "Usage: dedeadname <path to config> <git remote url> [--push]"
 fi
@@ -72,7 +68,7 @@ for username in "${OLD_USERNAMES[@]}"; do
     echo "literal:$username==>$NEW_USERNAME" >> "$REPLACE_TEXT_PATH"
 done
 
-for replace in "${REPLACE_PATTERNS}"; do
+for replace in "${REPLACE_PATTERNS[@]}"; do
     echo "literal:$replace" >> "$REPLACE_TEXT_PATH"
 done
 
